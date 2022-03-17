@@ -59,6 +59,15 @@ G**et conversion result**
 
 ___
 
+Currently support currencies:
+ - EUR
+ - USD
+ - GBP
+ - BTC
+ - ETH
+ - FKE
+___
+
 Developed by _Vakaris Paulavicius_ for the company _Bankera_ as a recruitment task.
 
 Version 1.0
