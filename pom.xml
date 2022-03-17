@@ -12,7 +12,7 @@
 	<artifactId>currency_converter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>currency_converter</name>
-	<description>Currency converter for Bankera</description>
+	<description>com.example.currency_converter.models.Currency converter for Bankera</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -31,6 +31,20 @@
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
