@@ -7,13 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * A service that provides methods to edit, retrieve, insert currencies.
  *
  * @author Vakaris Paulavicius
- * @version 1.6
+ * @version 1.7
  */
 @Service
 public class CurrencyService {
@@ -53,8 +52,8 @@ public class CurrencyService {
      * @param newCurrency New currency which to insert to.
      */
     public void insertCurrency(Currency newCurrency) {
-        Optional<Currency> currency = currencyRepository.findById(newCurrency.getName());
-        if(currency.isPresent()) {
+        boolean exists = currencyRepository.existsById(newCurrency.getName());
+        if(exists) {
             throw new CustomException("Currency " + newCurrency.getName() + " already exists in the database, so it cannot be inserted again.");
         }
         else {
