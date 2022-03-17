@@ -7,20 +7,49 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * A service that provides methods to edit, retrieve, insert currencies.
+ *
+ * @author Vakaris Paulavicius
+ * @version 1.0
+ */
 @Service
 public class CurrencyService {
 
     private final CurrencyRepository currencyRepository;
 
+    /**
+     * Public CurrencyService constructor.
+     * @param currencyRepository Repository where Currency objects are stored.
+     */
     @Autowired
     public CurrencyService(CurrencyRepository currencyRepository) {
         this.currencyRepository = currencyRepository;
     }
 
+    /**
+     * Used to get a list of all the currencies that are currently being stored in the repository.
+     * @return A list of all Currency objects.
+     */
     public List<Currency> getCurrencies() {
         return currencyRepository.findAll();
     }
 
+
+    /**
+     * Used to get the Currency object by name.
+     * @param name Currency object name.
+     * @return Currency object if one was found, throw an exception otherwise.
+     */
+    public Currency getCurrency(String name) {
+        return currencyRepository.findById(name).orElseThrow(() -> new IllegalStateException(
+                "Currency " + name + "does not exist in the database."));
+    }
+
+    /**
+     * Used to insert a new currency to the repository.
+     * @param newCurrency New currency which to insert to.
+     */
     public void insertCurrency(Currency newCurrency) {
         Optional<Currency> currency = currencyRepository.findById(newCurrency.getName());
         if(currency.isPresent()) {
@@ -30,7 +59,12 @@ public class CurrencyService {
             currencyRepository.save(newCurrency);
         }
     }
-    
+
+    /**
+     * Used to update the exchange rate of the currency.
+     * @param name Name of the currency.
+     * @param exchangeRate New exchange rate which to update to.
+     */
     public void updateCurrency(String name, double exchangeRate) {
         Currency currency = currencyRepository.findById(name).orElseThrow(() -> new IllegalStateException(
                 "Currency " + name + "does not exist in the database."));
