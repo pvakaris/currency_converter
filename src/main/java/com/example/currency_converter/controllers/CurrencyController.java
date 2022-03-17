@@ -3,9 +3,7 @@ package com.example.currency_converter.controllers;
 import com.example.currency_converter.models.Currency;
 import com.example.currency_converter.services.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,15 @@ public class CurrencyController {
     @GetMapping
     public List<Currency> getCurrencies() {
         return currencyService.getCurrencies();
+    }
+
+    @PostMapping
+    public void postCurrency(@RequestBody Currency currency) {
+        currencyService.insertCurrency(currency);
+    }
+
+    @PutMapping(path = "{name}")
+    public void updateCurrency(@PathVariable("name") String name, @RequestParam(required = false) double exchangeRate) {
+        currencyService.updateCurrency(name, exchangeRate);
     }
 }
