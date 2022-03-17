@@ -1,5 +1,6 @@
 package com.example.currency_converter.services;
 
+import com.example.currency_converter.exceptions.CustomException;
 import com.example.currency_converter.models.Currency;
 import com.example.currency_converter.repositories.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.Optional;
  * A service that provides methods to edit, retrieve, insert currencies.
  *
  * @author Vakaris Paulavicius
- * @version 1.3
+ * @version 1.6
  */
 @Service
 public class CurrencyService {
@@ -43,8 +44,8 @@ public class CurrencyService {
      * @return Currency object if one was found, throw an exception otherwise.
      */
     public Currency getCurrency(String name) {
-        return currencyRepository.findById(name).orElseThrow(() -> new IllegalStateException(
-                "Currency " + name + "does not exist in the database."));
+        return currencyRepository.findById(name).orElseThrow(() -> new CustomException(
+                "Currency " + name + " does not exist in the database."));
     }
 
     /**
@@ -54,7 +55,7 @@ public class CurrencyService {
     public void insertCurrency(Currency newCurrency) {
         Optional<Currency> currency = currencyRepository.findById(newCurrency.getName());
         if(currency.isPresent()) {
-            throw new IllegalStateException("Currency " + newCurrency.getName() + " already exists in the database.");
+            throw new CustomException("Currency " + newCurrency.getName() + " already exists in the database, so it cannot be inserted again.");
         }
         else {
             currencyRepository.save(newCurrency);
@@ -67,15 +68,20 @@ public class CurrencyService {
      * @param newCurrency New currency which to update to.
      */
     public ResponseEntity<Currency> updateCurrency(String name, Currency newCurrency) {
-        Currency currency = currencyRepository.findById(name).orElseThrow(() -> new IllegalStateException(
-                "Currency " + name + "does not exist in the database."));
+        Currency currency = currencyRepository.findById(name).orElseThrow(() -> new CustomException(
+                "Currency " + name + " does not exist in the database, so it cannot be updated."));
         if(null != newCurrency.getName() && newCurrency.getName().equals(currency.getName())) {
-            currency.setExchangeRate(newCurrency.getExchangeRate());
-            final Currency updatedCurrency = currencyRepository.save(currency);
-            return ResponseEntity.ok(updatedCurrency);
+            if(newCurrency.getExchangeRate() == 0) {
+                throw new CustomException("Currency exchange rate cannot be 0.");
+            }
+            else {
+                currency.setExchangeRate(newCurrency.getExchangeRate());
+                final Currency updatedCurrency = currencyRepository.save(currency);
+                return ResponseEntity.ok(updatedCurrency);
+            }
         }
         else {
-            throw new IllegalStateException("Names are not the same.");
+            throw new CustomException("Currency name in the URL is not the same as the one in the request body. " + name + " != " + newCurrency.getName() + ".");
         }
     }
 }
