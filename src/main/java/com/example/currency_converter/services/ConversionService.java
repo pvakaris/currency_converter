@@ -36,12 +36,10 @@ public class ConversionService {
      * @return ConversionResult.
      */
     public ConversionResult getConversion(String convertFrom, String convertTo, double amount) {
-
         Currency currencyFrom = currencyRepository.findById(convertFrom).orElseThrow(() -> new IllegalStateException(
                 convertFrom + " currency does not exist in the database."));
         Currency currencyTo = currencyRepository.findById(convertTo).orElseThrow(() -> new IllegalStateException(
                 convertTo + " currency does not exist in the database."));
-
         double result = convert(amount, currencyFrom.getExchangeRate(), currencyTo.getExchangeRate());
         return new ConversionResult(convertFrom, convertTo, amount, result);
     }

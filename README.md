@@ -1,16 +1,16 @@
-# This is a currency converter API.
+## Currency converter API
 
 _How to use (localhost | PORT 8080):_
 ___
 
-**Get all the currencies**
+**Get all the currencies:**
 
     http://localhost:8080/currencies
 
 ___
 
 
-**Get currency by name**
+**Get currency by name:**
 
 `{A} - name of the currency`
 
@@ -19,17 +19,18 @@ ___
 ___
 
 
-**Update currency by name**
+**Update currency by name:**
 
 `{A} - name of the currency which to update`
-`{B} - new exchange rate which to change to`
+
+`{B} - new exchange rate which to change thr old one to to`
 
     http://localhost:8080/currencies/update/{A}?exchangeRate={B}
 
 ___
 
 
-**Insert a new currency to the database**
+**Insert a new currency to the database:**
 
 `Request body:`
 
@@ -41,13 +42,13 @@ ___
 
     }
 
- URL:
+`URL:`
 
     http://localhost:8080/currencies/
 
 ___
 
-G**et conversion result**
+**Get conversion result:**
 
 `{A} - name of the currency which to convert from` 
 
@@ -59,7 +60,7 @@ G**et conversion result**
 
 ___
 
-Currently support currencies:
+Supported currencies:
  - EUR
  - USD
  - GBP
@@ -68,7 +69,7 @@ Currently support currencies:
  - FKE
 ___
 
-Developed by _Vakaris Paulavicius_ for the company _Bankera_ as a recruitment task.
+Developed by _Vakaris Paulavicius_ for _Bankera_ as a recruitment task.
 
 Version 1.0
 

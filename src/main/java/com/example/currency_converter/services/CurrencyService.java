@@ -3,6 +3,7 @@ package com.example.currency_converter.services;
 import com.example.currency_converter.models.Currency;
 import com.example.currency_converter.repositories.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,7 @@ import java.util.Optional;
  * A service that provides methods to edit, retrieve, insert currencies.
  *
  * @author Vakaris Paulavicius
- * @version 1.0
+ * @version 1.3
  */
 @Service
 public class CurrencyService {
@@ -63,11 +64,18 @@ public class CurrencyService {
     /**
      * Used to update the exchange rate of the currency.
      * @param name Name of the currency.
-     * @param exchangeRate New exchange rate which to update to.
+     * @param newCurrency New currency which to update to.
      */
-    public void updateCurrency(String name, double exchangeRate) {
+    public ResponseEntity<Currency> updateCurrency(String name, Currency newCurrency) {
         Currency currency = currencyRepository.findById(name).orElseThrow(() -> new IllegalStateException(
                 "Currency " + name + "does not exist in the database."));
-        currency.setExchangeRate(exchangeRate);
+        if(null != newCurrency.getName() && newCurrency.getName().equals(currency.getName())) {
+            currency.setExchangeRate(newCurrency.getExchangeRate());
+            final Currency updatedCurrency = currencyRepository.save(currency);
+            return ResponseEntity.ok(updatedCurrency);
+        }
+        else {
+            throw new IllegalStateException("Names are not the same.");
+        }
     }
 }

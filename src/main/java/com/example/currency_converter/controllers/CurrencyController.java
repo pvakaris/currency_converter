@@ -3,6 +3,7 @@ package com.example.currency_converter.controllers;
 import com.example.currency_converter.models.Currency;
 import com.example.currency_converter.services.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * REST controller of currencies.
  *
  * @author Vakaris Paulavicius
- * @version 1.0
+ * @version 1.4
  */
 @RestController
 @RequestMapping(path = "/currencies")
@@ -40,9 +41,9 @@ public class CurrencyController {
      * Used to get currency according to the specified name.
      * @param name Name of the currency.
      */
-    @PutMapping(path = "{name}")
-    public void getCurrency(@PathVariable("name") String name) {
-        currencyService.getCurrency(name);
+    @GetMapping(path = "/{name}")
+    public Currency getCurrency(@PathVariable("name") String name) {
+        return currencyService.getCurrency(name);
     }
 
     /**
@@ -57,10 +58,10 @@ public class CurrencyController {
     /**
      * Used to update the exchange rate of the currency "name".
      * @param name Name of the currency.
-     * @param exchangeRate New exchange rate.
+     * @param newCurrency New currency which to update to.
      */
-    @PutMapping(path = "/update{name}")
-    public void updateCurrency(@PathVariable("name") String name, @RequestParam double exchangeRate) {
-        currencyService.updateCurrency(name, exchangeRate);
+    @PutMapping(path = "/update/{name}")
+    public ResponseEntity<Currency> updateCurrency(@PathVariable("name") String name, @RequestBody Currency newCurrency) {
+        return currencyService.updateCurrency(name, newCurrency);
     }
 }

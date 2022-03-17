@@ -5,7 +5,7 @@ package com.example.currency_converter.models;
  * It's used to return a JSON response.
  *
  * @author Vakaris Paulavicius
- * @version 1.0
+ * @version 1.2
  */
 public class ConversionResult {
 
@@ -26,6 +26,38 @@ public class ConversionResult {
         this.convertedTo = convertedTo;
         this.givenAmount = givenAmount;
         this.resultAmount = resultAmount;
+    }
+
+    /**
+     * Get convertedFrom value.
+     * @return convertedFrom value.
+     */
+    public String getConvertedFrom() {
+        return convertedFrom;
+    }
+
+    /**
+     * Get convertedTo value.
+     * @return convertedTo value.
+     */
+    public String getConvertedTo() {
+        return convertedTo;
+    }
+
+    /**
+     * Get givenAmount value.
+     * @return givenAmount value.
+     */
+    public double getGivenAmount() {
+        return givenAmount;
+    }
+
+    /**
+     * Get resultAmount value.
+     * @return resultAmount value.
+     */
+    public double getResultAmount() {
+        return resultAmount;
     }
 
 }
