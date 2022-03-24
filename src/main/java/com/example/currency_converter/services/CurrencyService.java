@@ -12,7 +12,7 @@ import java.util.List;
  * A service that provides methods to edit, retrieve, insert currencies.
  *
  * @author Vakaris Paulavicius
- * @version 1.7
+ * @version 1.8
  */
 @Service
 public class CurrencyService {
@@ -32,7 +32,7 @@ public class CurrencyService {
      * Used to get a list of all the currencies that are currently being stored in the repository.
      * @return A list of all Currency objects.
      */
-    public List<Currency> getCurrencies() {
+    public List<Currency> getAllCurrencies() {
         return currencyRepository.findAll();
     }
 

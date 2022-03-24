@@ -40,7 +40,7 @@ class CurrencyServiceTest {
 
     @Test
     void getAllCurrenciesGetsAllCurrenciesStoredInTheDatabase() {
-        service.getCurrencies();
+        service.getAllCurrencies();
         verify(currencyRepository).findAll();
     }
 

@@ -34,7 +34,7 @@ ___
 `URL:`
 `{A} - name of the currency which to update`
 
-    http://localhost:8080/currencies/{A}
+    http://localhost:8080/currencies/update/{A}
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 `URL:`
 
-    http://localhost:8080/currencies/
+    http://localhost:8080/currencies/insert
 
 ___
 
@@ -78,10 +78,10 @@ Supported currencies:
  - FKE
 ___
 
-Developed by _Vakaris Paulavicius_ for _Bankera_ as a recruitment task.
+Developed by _Vakaris Paulavičius_ for _Bankera_ as a recruitment task.
 
-Version 1.1
+Version 1.1.2
 
-2022-03-17
+2022-03-24
 
 
