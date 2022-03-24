@@ -11,7 +11,7 @@ import java.util.List;
  * REST controller of currencies.
  *
  * @author Vakaris Paulavicius
- * @version 1.4
+ * @version 1.5
  */
 @RestController
 @RequestMapping(path = "/currencies")
@@ -33,8 +33,8 @@ public class CurrencyController {
      * @return A List of Currency objects.
      */
     @GetMapping
-    public List<Currency> getCurrencies() {
-        return currencyService.getCurrencies();
+    public List<Currency> getAllCurrencies() {
+        return currencyService.getAllCurrencies();
     }
 
     /**
@@ -50,8 +50,8 @@ public class CurrencyController {
      * Used to insert a new currency object into the database.
      * @param currency A new currency object which to insert to.
      */
-    @PostMapping
-    public void postCurrency(@RequestBody Currency currency) {
+    @PostMapping(path = "/insert")
+    public void insertCurrency(@RequestBody Currency currency) {
         currencyService.insertCurrency(currency);
     }
 
